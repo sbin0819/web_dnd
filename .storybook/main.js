@@ -6,6 +6,10 @@ module.exports = {
     '@storybook/addon-essentials',
     'storybook-addon-styled-component-theme/dist/preset',
   ],
+  babel: async (options) => {
+    options.plugins.push('babel-plugin-inline-react-svg');
+    return options;
+  },
   webpackFinal: async (config) => {
     config.module.rules.unshift({ test: /\.svg$/, use: ['@svgr/webpack'] });
     config.resolve.modules = [
