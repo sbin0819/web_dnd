@@ -16,6 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["./src/components/*"],
+      "@common/*": ["./src/components/common/*"],
+      "@common": ["./src/components/common"],
       "@pages/*": ["./src/pages/*"],
       "@api/*": ["./src/lib/api/*"],
       "@assets/*": ["./src/assets/*"]

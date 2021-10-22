@@ -1,7 +1,10 @@
-import React from 'react';
-
+import { Button } from '@common';
 function a() {
-  return <div>a</div>;
+  return (
+    <div>
+      <Button />
+    </div>
+  );
 }
 
 export default a;
