@@ -1,38 +1,21 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-
-module.exports = withBundleAnalyzer({
-  target: 'serverless',
-  env: {
-    BASE_URL: process.env.BASE_URL,
-  },
-
-  webpack(conf) {
-    conf.module.rules.push({
+const Dotenv = require('dotenv-webpack');
+module.exports = {
+  reactStrictMode: true,
+  webpack(config, { dev, webpack }) {
+    config.module.rules.push({
       test: /\.svg$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: [
-                {
-                  // Enable figma's wrong mask-type attribute work
-                  removeRasterImages: false,
-                  removeStyleElement: false,
-                  removeUnknownsAndDefaults: false,
-                  // Enable svgr's svg to fill the size
-                  removeViewBox: false,
-                },
-              ],
-            },
-          },
-        },
-      ],
+      use: ['@svgr/webpack', 'url-loader'],
     });
-    // 절대경로
-    conf.resolve.modules.push(__dirname);
-    return conf;
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        API_DOMAIN:
+          process.env.NODE_ENV === 'production'
+            ? JSON.stringify(process.env.API_URL)
+            : JSON.stringify(process.env.DEV_API_URL),
+      }),
+      new webpack.EnvironmentPlugin(['NODE_ENV']),
+      new Dotenv({ silent: true }),
+    );
+    return config;
   },
-});
+};
