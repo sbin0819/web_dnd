@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
-  background: gold;
-  color: red;
-`;
-function test() {
-  return <Container>hi</Container>;
+import Header from '@components/header';
+
+const Container = styled.div``;
+function index() {
+  return (
+    <Container>
+      <Header />
+    </Container>
+  );
 }
 
-export default test;
+export default index;

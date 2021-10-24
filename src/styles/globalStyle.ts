@@ -14,9 +14,13 @@ export const GlobalStyle = createGlobalStyle`
     html{
         font-size: 20px;
         -webkit-text-size-adjust: none;
-        font-family: -apple-system,BlinkMacSystemFont,helvetica,Apple SD Gothic Neo,sans-serif;       
-        font-display: fallback;   
+        font-family: -apple-system,BlinkMacSystemFont,helvetica,Apple SD Gothic Neo,sans-serif;
+        font-display: fallback;
         -ms-overflow-style: none;
         scrollbar-width: none;
+    }
+    a{
+        color: inherit;
+        text-decoration:none;
     }
 `;
