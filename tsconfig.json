@@ -18,6 +18,7 @@
       "@components/*": ["./src/components/*"],
       "@common/*": ["./src/components/common/*"],
       "@common": ["./src/components/common"],
+      "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
       "@api/*": ["./src/lib/api/*"],
       "@assets/*": ["./src/assets/*"]

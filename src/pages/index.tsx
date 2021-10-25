@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-import Header from '@components/header';
+import Searchbar from '@components/Searchbar';
 
 const Container = styled.div``;
 function index() {
   return (
-    <Container>
-      <Header />
-    </Container>
+    <>
+      <Searchbar />
+      <Container></Container>
+    </>
   );
 }
 

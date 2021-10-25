@@ -4,6 +4,14 @@ import { reset } from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`
     ${reset}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        letter-spacing: -0.25px;
+        line-height: 1.24;
+    }
+
     :focus {
         outline: none;
         border: none;
@@ -18,6 +26,11 @@ export const GlobalStyle = createGlobalStyle`
         font-display: fallback;
         -ms-overflow-style: none;
         scrollbar-width: none;
+    }
+    body {
+        background: #18191f;
+        color: white;
+        min-height: 100vh;
     }
     a{
         color: inherit;

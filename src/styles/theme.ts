@@ -7,6 +7,7 @@ const sizes = {
   tablet: 600,
   mobile: 374,
 };
+
 const theme: DefaultTheme = {
   media: Object.keys(sizes).reduce((acc: any, label: string) => {
     if (
