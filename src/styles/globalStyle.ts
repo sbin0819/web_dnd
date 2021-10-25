@@ -30,7 +30,6 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background: #18191f;
         color: white;
-        min-height: 100vh;
     }
     a{
         color: inherit;

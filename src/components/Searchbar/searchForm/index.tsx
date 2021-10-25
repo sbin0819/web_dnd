@@ -1,22 +1,27 @@
+import { useRouter } from 'next/router';
 import { Input } from '@components/common';
 import useInputs from '@hooks/useInputs';
 
 function SearchForm() {
+  const router = useRouter();
   const { form, onChange, reset } = useInputs({ search: '' });
+  const { search } = form;
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(form);
-        reset();
+        if (search) {
+          reset();
+          router.push(`https://www.google.com/search?q=${search}`);
+        }
       }}
     >
       <Input
         type="submit"
         name={'search'}
-        value={form.search}
+        value={search}
         onChange={onChange}
-        placeholder="search바에서 검색"
+        placeholder="Google에서 검색"
       />
     </form>
   );

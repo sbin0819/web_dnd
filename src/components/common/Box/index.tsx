@@ -12,9 +12,9 @@ const Container = styled.div`
   align-items: center;
   width: ${styles.size.md.width}px;
   height: ${styles.size.md.height}px;
-  background: grey;
+  background: #fff;
   border-radius: 8px;
-  opacity: 0.4;
+  color: #000;
 `;
 
 interface IProps {

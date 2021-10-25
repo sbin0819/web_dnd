@@ -10,7 +10,7 @@ const Container = styled.div<IProps>`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   border-radius: 8px;
-  opacity: 0.4;
+  opacity: 0.7;
   cursor: pointer;
   font-size: ${({ fontSize }) => fontSize}px;
   :hover {

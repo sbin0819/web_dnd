@@ -18,10 +18,9 @@ const Container = styled.div<IProps>`
   cursor: pointer;
   img {
     width: 100%;
-    height: 100%;
+    height: auto;
     position: relative !important;
-    object-fit: cover; // Optional
-    border-radius: 30%;
+    object-fit: contain; // Optional
   }
 `;
 
