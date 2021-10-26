@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import NavLeft from './NavLeft';
 import NavRight from './NavRight';
 
+import useWindowSize from '@hooks/useWindowSize';
+
 function Header() {
+  const { width }: { width?: number } = useWindowSize();
   return (
     <Container>
       <NavLeft />
-      <NavRight />
+      {width && width > 550 && <NavRight />}
     </Container>
   );
 }

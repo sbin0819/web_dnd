@@ -19,11 +19,10 @@ interface IProps extends BasicInputProps, InputStyleProps {
   label?: any;
 }
 
-const Container = styled.div`
+const Container = styled.div<{ width?: number; height?: number }>`
   display: flex;
   align-items: center;
-  width: 400px;
-  min-width: 300px;
+  width: ${({ width }) => (width ? width : 300)}px;
   height: 54px;
   .icon {
     position: relative;
@@ -31,7 +30,9 @@ const Container = styled.div`
   }
 `;
 
-const StyledInput = styled.input<{ icon?: boolean }>`
+const StyledInput = styled.input<{
+  icon?: boolean;
+}>`
   width: 100%;
   height: 100%;
   color: #ffff;
@@ -67,8 +68,9 @@ function Input({
   width,
   height,
 }: IProps) {
+  console.log(width);
   return (
-    <Container>
+    <Container width={width} height={height}>
       {icon && (
         <span className="icon">
           <AiOutlineSearch />

@@ -17,10 +17,12 @@ const Container = styled.div<IProps>`
   border-radius: 30%;
   cursor: pointer;
   img {
+    position: absolute;
+    height: 100%;
     width: 100%;
-    height: auto;
-    position: relative !important;
-    object-fit: contain; // Optional
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 30%;
   }
 `;
 

@@ -43,12 +43,12 @@ const SettingsContainer = styled.div`
   left: 0;
   padding-left: 15px;
   .settings {
-    color: #b8b8b8;
-    font-size: 30px;
+    color: #e2e2e2;
+    font-size: 22px;
     cursor: pointer;
     background: #6d6d6d;
     padding: 3px 4px;
-    border-radius: 4px;
+    border-radius: 8px;
   }
 `;
 function SearchBar() {
