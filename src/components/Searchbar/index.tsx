@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import styled from 'styled-components';
 
 import SearchForm from './searchForm';
@@ -56,7 +56,7 @@ function SearchBar() {
     <>
       <Container>
         <ImageContainer>
-          <Image src={imageUrl} layout="fill" alt="sidebar" />
+          <img src={'img/searchbar/2.jpg'} alt="sidebar" />
         </ImageContainer>
         <SearchForm />
         <EditBar>

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import styled from 'styled-components';
 
 interface IProps {
@@ -30,7 +30,7 @@ function index({ size = 25, imgPath }: IProps) {
   return (
     <Container size={size}>
       {imgPath ? (
-        <Image src={imgPath} layout="fill" alt="profile_img" />
+        <img src={'img/header/test.jpg'}  alt="profile_img" />
       ) : (
         <div>A</div>
       )}
