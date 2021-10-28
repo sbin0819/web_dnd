@@ -1,15 +1,7 @@
-import styled from 'styled-components';
+import Home from '@components/Home';
 
-import Searchbar from '@components/Searchbar';
-
-const Container = styled.div``;
 function index() {
-  return (
-    <>
-      <Searchbar />
-      <Container></Container>
-    </>
-  );
+  return <Home />;
 }
 
 export default index;

@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+import React from 'react';
 import styled from 'styled-components';
 import { BasicInputProps } from './types';
 
@@ -15,22 +17,21 @@ const StyledInput = styled.input`
   padding: 0 20px;
 `;
 
-function UrlInput({
-  type,
-  name,
-  value,
-  onChange,
-  placeholder,
-}: BasicInputProps) {
-  return (
-    <StyledInput
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-    />
-  );
-}
+type RefType = HTMLInputElement;
+
+const UrlInput = React.forwardRef<RefType, BasicInputProps>(
+  ({ type, name, value, onChange, placeholder }, ref) => {
+    return (
+      <StyledInput
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        ref={ref}
+      />
+    );
+  },
+);
 
 export default UrlInput;

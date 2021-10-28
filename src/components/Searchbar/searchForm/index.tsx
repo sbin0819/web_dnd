@@ -22,7 +22,6 @@ function SearchForm() {
         value={search}
         onChange={onChange}
         placeholder="Google에서 검색"
-        width={300}
       />
     </form>
   );

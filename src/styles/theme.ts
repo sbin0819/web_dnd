@@ -1,31 +1,41 @@
-import { DefaultTheme, css, CSSObject } from 'styled-components';
-const sizes = {
-  desktop_1: 1919,
-  desktop_2: 1599,
-  desktop_3: 1365,
-  desktop_4: 1023,
-  tablet: 600,
-  mobile: 374,
+import {
+  MainTheme,
+  DeskTopTheme,
+  MobileTheme,
+  css,
+  CSSObject,
+} from 'styled-components';
+
+const desktop: DeskTopTheme = {
+  type: 'desktop',
+  background: 'pink',
+  space: {},
+  header: {},
+  card: {},
+  input: {
+    width: 400,
+  },
+  button: {},
 };
 
-const theme: DefaultTheme = {
-  media: Object.keys(sizes).reduce((acc: any, label: string) => {
-    if (
-      label === 'desktop_1' ||
-      label === 'desktop_2' ||
-      label === 'desktop_3' ||
-      label === 'desktop_4' ||
-      label === 'tablet' ||
-      label === 'mobile'
-    ) {
-      acc[label] = (args: CSSObject | TemplateStringsArray) =>
-        css`
-          @media (max-width: ${sizes[label]}px) {
-            ${css(args)};
-          }
-        `;
-    }
-    return acc;
-  }, {}),
+const mobile: MobileTheme = {
+  type: 'mobile',
+  space: {},
+  header: {},
+  card: {},
+  input: {
+    width: 280,
+  },
+  button: {},
 };
+
+const theme = (type: string) => {
+  if (type === 'desktop') {
+    return desktop;
+  }
+  if (type === 'mobile') {
+    return mobile;
+  }
+};
+
 export { theme };

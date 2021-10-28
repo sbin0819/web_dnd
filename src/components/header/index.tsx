@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import NavLeft from './NavLeft';
 import NavRight from './NavRight';
 
-import useWindowSize from '@hooks/useWindowSize';
-
-function Header() {
-  const { width }: { width?: number } = useWindowSize();
+interface IProps {
+  size: 'desktop' | 'mobile';
+}
+function Header({ size }: IProps) {
   return (
     <Container>
       <NavLeft />
-      {width && width > 550 && <NavRight />}
+      {size === 'desktop' && <NavRight />}
     </Container>
   );
 }

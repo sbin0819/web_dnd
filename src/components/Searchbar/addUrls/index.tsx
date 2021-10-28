@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { AddButton, Box } from '@common';
-
-import UrlForm from './UrlForm';
-
+import { UrlForm } from '@common/Modal';
+// import UrlForm from './UrlForm';
 import useInputs from '@hooks/useInputs';
 import useClickOutside from '@hooks/useClickOutside';
 
@@ -27,6 +26,10 @@ function AddUrls() {
   useClickOutside(formRef, () => setIsOpen(false));
   const addUrl = (url: string, title: string) => {
     setBoxes((prev) => [...prev, { title, url }]);
+    setIsOpen(false);
+    reset();
+  };
+  const onReset = () => {
     reset();
     setIsOpen(false);
   };
@@ -44,7 +47,7 @@ function AddUrls() {
           <UrlForm
             form={form}
             onChange={onChange}
-            reset={reset}
+            onReset={onReset}
             addUrl={addUrl}
           />
         )}

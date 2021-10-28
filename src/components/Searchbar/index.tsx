@@ -56,7 +56,7 @@ function SearchBar() {
     <>
       <Container>
         <ImageContainer>
-          <img src={'img/searchbar/2.jpg'} alt="sidebar" />
+          <img src={'img/searchbar/2.jpg'} alt="search-bg" />
         </ImageContainer>
         <SearchForm />
         <EditBar>

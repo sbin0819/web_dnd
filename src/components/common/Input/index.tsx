@@ -22,7 +22,7 @@ interface IProps extends BasicInputProps, InputStyleProps {
 const Container = styled.div<{ width?: number; height?: number }>`
   display: flex;
   align-items: center;
-  width: ${({ width }) => (width ? width : 300)}px;
+  width: ${({ theme: { input }, width }) => (width ? width : input.width)}px;
   height: 54px;
   .icon {
     position: relative;
@@ -68,7 +68,6 @@ function Input({
   width,
   height,
 }: IProps) {
-  console.log(width);
   return (
     <Container width={width} height={height}>
       {icon && (

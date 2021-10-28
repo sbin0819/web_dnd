@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import { UrlInput } from '@common';
 
 import styled from 'styled-components';
@@ -27,21 +28,23 @@ const FormContainer = styled.div`
     border-width: 0 10px 10px 10px;
     border-color: transparent transparent #fff;
   }
+  z-index: 10;
 `;
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  div {
+  .input_container {
     flex: 1;
   }
 `;
 
 const ButtonContaienr = styled.div`
   position: absolute;
+  bottom: 0px;
   right: 0;
-  padding: 10px 20px 0px;
+  padding: 10px 20px 15px;
   button {
     width: 100px;
     height: 48px;
@@ -56,24 +59,37 @@ const ButtonContaienr = styled.div`
 
 interface IProps {
   form: any;
-  reset: any;
+  onReset: () => void;
   onChange: (e: any) => void;
   addUrl: (url: string, title: string) => void;
 }
-function UrlForm({ form, onChange, reset, addUrl }: IProps) {
+function UrlForm({ form, onChange, onReset, addUrl }: IProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    inputRef?.current?.focus();
+  }, []);
   const { url, title } = form;
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    if (url && title) {
+      addUrl(url, title);
+    } else {
+      alert('잘못된 입력입니다.');
+    }
+  };
   return (
     <FormContainer>
-      <StyledForm>
-        <div>
+      <StyledForm onSubmit={onSubmit}>
+        <div className="input_container">
           <UrlInput
             name="url"
             value={url}
             onChange={onChange}
             placeholder="url을 입력해주세요"
+            ref={inputRef}
           />
         </div>
-        <div>
+        <div className="input_container">
           <UrlInput
             name="title"
             value={title}
@@ -81,21 +97,13 @@ function UrlForm({ form, onChange, reset, addUrl }: IProps) {
             placeholder="타이틀을 입력해주세요"
           />
         </div>
+        <ButtonContaienr>
+          <button type="button" onClick={() => onReset()}>
+            취소
+          </button>
+          <button type="submit">확인</button>
+        </ButtonContaienr>
       </StyledForm>
-      <ButtonContaienr>
-        <button onClick={() => reset()}>취소</button>
-        <button
-          onClick={() => {
-            if (url && title) {
-              addUrl(url, title);
-            } else {
-              alert('잘못된 입력입니다.');
-            }
-          }}
-        >
-          확인
-        </button>
-      </ButtonContaienr>
       <div className="figure"></div>
     </FormContainer>
   );
