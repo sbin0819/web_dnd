@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   min-width: 250px;
   max-width: 600px;
+  min-height: ${({ theme }) => (theme.type == 'mobile' ? 360 : 320)}px;
   aspect-ratio: ${({ theme }) => (theme.type == 'mobile' ? 7 / 6 : 7 / 8)};
   max-height: 450px;
 
@@ -31,15 +32,21 @@ export const ImageContainer = styled.div`
 export const DesContainer = styled.div`
   flex: 5;
   position: relative;
-  margin: 20px 15px;
+  margin: 20px 15px 10px;
   .cd-title {
     color: #fff;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden; /* ★★ 설정이 필요한 영역 ★★ */ /* ★★ 3줄 이상은 말줄임 처리 ★★ */
+    height: 20px; /* ★★ line-height * 3 ★★ */
+    -webkit-line-clamp: 1; /* ★★ line-height:20px일때 ★★ */
   }
   .cd-text {
     position: absolute;
     margin-top: 18px;
     display: -webkit-box;
-    width: inherit;
     -webkit-box-orient: vertical;
     word-wrap: break-word;
     text-overflow: ellipsis;
