@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>boilerplate</title>
+        <title>WEB DND</title>
       </Head>
       <ThemeProvider theme={theme(type)}>
         <Header size={type} />

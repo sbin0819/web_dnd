@@ -6,7 +6,7 @@ const useTheme = () => {
   const { width } = useWindowSize();
 
   useEffect(() => {
-    if (width && width < 550) {
+    if (width && width < 700) {
       setType('mobile');
     } else {
       setType('desktop');

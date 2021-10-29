@@ -25,7 +25,7 @@ const SidebarContainer = styled.div<IScroll>`
 `;
 
 const CardContainer = styled.div<IScroll>`
-  flex: 3;
+  flex: 1;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
@@ -66,9 +66,11 @@ function Home() {
           </SidebarContainer>
         )}
         <CardContainer isScroll={isScroll}>
-          {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, i) => (
-            <Card key={i} />
-          ))}
+          {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(
+            (_, i) => (
+              <Card key={i} />
+            ),
+          )}
         </CardContainer>
       </Container>
     </div>
