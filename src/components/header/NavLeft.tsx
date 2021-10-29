@@ -19,7 +19,7 @@ function NavLeft() {
         <a>홈 피드</a>
       </Link>
       <Link href="/board">
-        <a>board</a>
+        <a>drag</a>
       </Link>
       <Link href="/favorite">
         <a>favorite</a>
