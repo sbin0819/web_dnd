@@ -1,9 +1,12 @@
+import Board from '@components/Board';
 import styled from 'styled-components';
-
-const Container = styled.div``;
-
+const Conatiner = styled.div``;
 function board() {
-  return <Container>board</Container>;
+  return (
+    <Conatiner>
+      <Board />
+    </Conatiner>
+  );
 }
 
 export default board;

@@ -10,7 +10,8 @@ import useScoll from '@hooks/useScroll';
 const Container = styled.div`
   display: flex;
   padding: 50px 35px;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow: ${({ theme }) => (theme.type !== 'mobile' ? 'scroll' : 'hidden')};
 `;
 
 interface IScroll {
