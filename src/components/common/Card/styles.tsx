@@ -13,6 +13,8 @@ export const Container = styled.div`
   border: 1px solid grey;
   border-radius: 12px;
   color: #78797d;
+
+  cursor: pointer;
 `;
 
 export const ImageContainer = styled.div`
@@ -72,4 +74,24 @@ export const FootContainer = styled.div`
   align-items: center;
   padding-left: 15px;
   gap: 7px;
+`;
+
+interface DragContainer {
+  width?: number;
+  height?: number;
+}
+export const DragContainer = styled.div<DragContainer>`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  width: ${({ width }) => (width ? width : 280)}px;
+  height: ${({ height }) => (height ? height : 310)}px;
+  max-height: 450px;
+
+  border: 1px solid grey;
+  border-radius: 12px;
+  color: #78797d;
+
+  cursor: pointer;
 `;

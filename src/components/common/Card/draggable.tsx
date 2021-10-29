@@ -1,6 +1,6 @@
 import { data } from './mock';
 import {
-  Container,
+  DragContainer,
   ImageContainer,
   DesContainer,
   FootContainer,
@@ -12,14 +12,16 @@ import Draggable, { DraggableEvent } from 'react-draggable';
  * 3*2의 배수만큼 불러온다. 넘치는 만큼 skeleton card를 추가한다.
  *햐
  */
-interface IProps {
-  draggable?: boolean;
+
+interface D {
+  width?: number;
+  height?: number;
 }
-function Card({ draggable = false }: IProps) {
+function DragCard({ width, height }: D) {
   const d = data[0];
   return (
-    <Draggable disabled={!draggable}>
-      <Container>
+    <Draggable>
+      <DragContainer width={width} height={height}>
         <ImageContainer className="cd-header">
           <img src={`${d.img}`} alt="top" />
         </ImageContainer>
@@ -32,9 +34,9 @@ function Card({ draggable = false }: IProps) {
           <Avartar size={20} imgPath="a" radius={50} />
           <div>{d.footer.name}</div>
         </FootContainer>
-      </Container>
+      </DragContainer>
     </Draggable>
   );
 }
 
-export default Card;
+export default DragCard;
