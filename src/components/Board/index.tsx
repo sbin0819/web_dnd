@@ -13,6 +13,8 @@ const Container = styled.div``;
  * ? elements drags 들을 통해서 만들어 지는 element들
  */
 
+// !! draggable 한 컴포넌트들을 만들어 주어야함
+
 export default function Board() {
   return (
     <Container>
