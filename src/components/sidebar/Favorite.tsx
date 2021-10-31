@@ -57,7 +57,7 @@ function FavSidebar() {
   const [category, setCategory] = useState([favCate, ...defaultCategory]);
   const [activeCategory, setActiveCategory] = useState('관심 카테고리');
   const [activeItem, setActiveItem] = useState('');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleActiveTitle = (e: any) => {
     const { textContent } = e.target;
@@ -71,6 +71,8 @@ function FavSidebar() {
     setActiveItem(textContent);
     // 카드 api 요청
   };
+
+  const handleModal = () => setIsOpen((prev) => !prev);
 
   // useEffect(() => {
   //   setCategory((prev) => [favCate, ...prev]);
@@ -86,11 +88,10 @@ function FavSidebar() {
               className={
                 d.title === activeCategory ? 'cate-title on' : 'cate-title '
               }
-              onClick={handleActiveTitle}
             >
-              <div>{d.title}</div>
+              <div onClick={handleActiveTitle}>{d.title}</div>
               {i === 0 && (
-                <div onClick={() => {}}>
+                <div onClick={handleModal}>
                   <BsThreeDots />
                 </div>
               )}
