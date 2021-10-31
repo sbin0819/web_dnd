@@ -7,6 +7,7 @@ import Card from '@common/Card';
 
 import useWindowSize from '@hooks/useWindowSize';
 import useScoll from '@hooks/useScroll';
+
 const Container = styled.div`
   display: flex;
   padding: 50px 35px;
@@ -36,7 +37,16 @@ const CardContainer = styled.div<IScroll>`
   overflow: ${({ isScroll }) => isScroll && 'scroll'};
 `;
 
+/**
+ *
+ *  {
+    main: '관심 카테고리',
+    sub: ['일반 개발', '웹 개발', '일반 기획', '일반 디자인'],
+    active: false,
+  },
+ */
 function Home() {
+  const [initData, setInitData] = useState([]);
   const [isScroll, setIsScroll] = useState(false);
   const [isSidebar, setIsSidebar] = useState(false);
   const { width } = useWindowSize();
