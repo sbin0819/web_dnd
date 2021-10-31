@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { defaultCategory } from '@lib/CONST/commonInfo';
+import { defaultCategory } from '@lib/CONST/datas';
+import { CategoryType, CategoryItemsType } from '@lib/CONST/types';
 
 const favCate = {
   title: '관심 카테고리',
@@ -27,18 +28,23 @@ const Container = styled.div`
   border-radius: 50px;
 `;
 
-const handleActiveCate = (target: any[], validate: { items: any[] }) => {
+const handleActiveCate = (
+  target: CategoryType[],
+  validate: { items: CategoryItemsType[] },
+) => {
   const validateArr = validate.items.map((i) => i.loc);
-  const result = target.map((obj) =>
-    obj.items.map((item: any) => {
-      return { ...item, seleted: validateArr.includes(item.loc) };
-    }),
-  );
-  return result;
+  return target.map((obj) => {
+    return {
+      ...obj,
+      items: obj.items.map((item) => {
+        return { ...item, seleted: validateArr.includes(item.loc) };
+      }),
+    };
+  });
 };
 
 function CategoryModal() {
-  const [active, setActive] = useState({});
+  const [active, setActive] = useState<CategoryType[]>([]);
   useEffect(() => {
     const result = handleActiveCate(defaultCategory, favCate);
     setActive(result);

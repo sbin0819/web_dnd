@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
-import { defaultCategory } from '@lib/CONST/commonInfo';
+import { defaultCategory } from '@lib/CONST/datas';
 
 import { CategoryModal } from '@common/Modal';
 
