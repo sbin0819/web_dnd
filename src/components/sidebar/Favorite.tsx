@@ -5,6 +5,8 @@ import { defaultCategory } from '@lib/CONST/commonInfo';
 
 import { CategoryModal } from '@common/Modal';
 
+import { CategoryType } from './types';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,7 +56,7 @@ const favCate = {
 // drop down 추가
 
 function FavSidebar() {
-  const [category, setCategory] = useState([favCate, ...defaultCategory]);
+  const [category, setCategory] = useState<CategoryType[]>([]);
   const [activeCategory, setActiveCategory] = useState('관심 카테고리');
   const [activeItem, setActiveItem] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -74,9 +76,9 @@ function FavSidebar() {
 
   const handleModal = () => setIsOpen((prev) => !prev);
 
-  // useEffect(() => {
-  //   setCategory((prev) => [favCate, ...prev]);
-  // }, []);
+  useEffect(() => {
+    setCategory([favCate, ...defaultCategory]);
+  }, []);
 
   return (
     <>

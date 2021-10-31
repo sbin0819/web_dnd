@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   padding: 50px 35px;
   /* overflow: hidden; */
-  overflow: ${({ theme }) => (theme.type !== 'mobile' ? 'scroll' : 'hidden')};
+  overflow: ${({ theme }) => (theme.type !== 'mobile' ? '' : 'hidden')};
 `;
 
 interface IScroll {
@@ -77,11 +77,9 @@ function Home() {
           </SidebarContainer>
         )}
         <CardContainer isScroll={isScroll}>
-          {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(
-            (_, i) => (
-              <Card key={i} />
-            ),
-          )}
+          {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, i) => (
+            <Card key={i} />
+          ))}
         </CardContainer>
       </Container>
     </div>
