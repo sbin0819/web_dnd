@@ -1,8 +1,8 @@
-import FavCategories from './FavCategories';
+import CategoryModal from './CategoryModal';
 import UrlForm from './UrlForm';
 const Modal = {
-  FavCategories,
+  CategoryModal,
   UrlForm,
 };
-export { FavCategories, UrlForm };
+export { CategoryModal, UrlForm };
 export default Modal;

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
+import { defaultCategory } from '@lib/CONST/commonInfo';
+
+import { CategoryModal } from '@common/Modal';
 
 const Container = styled.div`
   display: flex;
@@ -36,55 +39,25 @@ const Container = styled.div`
   }
 `;
 
-const cateInfo = [
-  {
-    title: '관심 카테고리',
-    items: ['일반 개발', '웹 개발', '일반 기획', '일반 디자인'],
-    active: false,
-    setting: true,
-  },
-  {
-    title: '개발',
-    items: [
-      '일반 개발',
-      '웹 개발',
-      'Javascript',
-      'React',
-      'Vue.js',
-      'Angular',
-      'Nodejs',
-      'java',
-      'Python',
-    ],
-    active: false,
-  },
-  {
-    title: '기획',
-    items: ['일반 기획', '웹 기획'],
-    active: false,
-  },
-  {
-    title: '디자인',
-    items: ['일반 디자인', '웹 디자인'],
-    active: false,
-  },
-  {
-    title: '마케팅',
-    items: ['일반 마케팅', '웹 마케팅'],
-    active: false,
-  },
-  {
-    title: '스타트업',
-    items: ['일반 스타트업', '웹 스타트업'],
-    active: true,
-  },
-];
+const favCate = {
+  title: '관심 카테고리',
+  items: [
+    { title: '일반 개발', loc: 'dev-0' },
+    { title: '웹 개발', loc: 'dev-1' },
+    { title: '일반 기획', loc: 'plan-0' },
+    { title: '웹 기획', loc: 'plan-1' },
+  ],
+  type: 'main',
+  include: ['dev', 'plan'],
+};
+
+// drop down 추가
 
 function FavSidebar() {
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState([favCate, ...defaultCategory]);
   const [activeCategory, setActiveCategory] = useState('관심 카테고리');
   const [activeItem, setActiveItem] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleActiveTitle = (e: any) => {
     const { textContent } = e.target;
@@ -99,12 +72,15 @@ function FavSidebar() {
     // 카드 api 요청
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   setCategory((prev) => [favCate, ...prev]);
+  // }, []);
+
   return (
     <>
-      {/* {isOpen && } */}
       <Container>
-        {cateInfo.map((d, i) => (
+        {isOpen && <CategoryModal />}
+        {category.map((d, i) => (
           <div key={i}>
             <div
               className={
@@ -113,7 +89,7 @@ function FavSidebar() {
               onClick={handleActiveTitle}
             >
               <div>{d.title}</div>
-              {d.setting && (
+              {i === 0 && (
                 <div onClick={() => {}}>
                   <BsThreeDots />
                 </div>
@@ -124,12 +100,12 @@ function FavSidebar() {
                 d.items.map((item, i) => (
                   <div
                     className={
-                      item === activeItem ? 'cate-item on' : 'cate-item '
+                      item.title === activeItem ? 'cate-item on' : 'cate-item '
                     }
                     key={i}
                     onClick={handleActiveItem}
                   >
-                    {item}
+                    {item.title}
                   </div>
                 ))}
             </div>

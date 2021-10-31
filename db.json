@@ -1,3 +1,17 @@
 {
-  "users": []
+  "users": [
+    {
+      "sidebar": {
+        "title": "관심 카테고리",
+        "items": [
+          { "title": "일반 개발", "loc": "dev-0" },
+          { "title": "웹 개발", "loc": "dev-1" },
+          { "title": "일반 기획", "loc": "plan-0" },
+          { "title": "웹 기획", "loc": "plan-1" }
+        ],
+        "type": "main",
+        "include": ["dev", "plan"]
+      }
+    }
+  ]
 }

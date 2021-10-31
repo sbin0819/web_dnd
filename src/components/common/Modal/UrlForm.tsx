@@ -86,7 +86,7 @@ function UrlForm({ form, onChange, onReset, addUrl }: IProps) {
             value={url}
             onChange={onChange}
             placeholder="url을 입력해주세요"
-            ref={inputRef}
+            // ref={inputRef}
           />
         </div>
         <div className="input_container">
