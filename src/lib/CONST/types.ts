@@ -1,11 +1,11 @@
 export interface CategoryItemsType {
   title: string;
   loc: string;
-  seleted?: boolean;
+  selected?: boolean;
 }
 export interface CategoryType {
   title: string;
   items: CategoryItemsType[];
   type: string;
-  include?: string[];
+  selected?: CategoryItemsType[];
 }

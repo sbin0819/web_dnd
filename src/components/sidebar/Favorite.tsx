@@ -59,7 +59,7 @@ function FavSidebar() {
   const [category, setCategory] = useState<CategoryType[]>([]);
   const [activeCategory, setActiveCategory] = useState('관심 카테고리');
   const [activeItem, setActiveItem] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleActiveTitle = (e: any) => {
     const { textContent } = e.target;
