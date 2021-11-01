@@ -50,7 +50,6 @@ const favCate = {
     { title: '웹 기획', loc: 'plan-1' },
   ],
   type: 'main',
-  include: ['dev', 'plan'],
 };
 
 // drop down 추가
@@ -83,7 +82,7 @@ function FavSidebar() {
   return (
     <>
       <Container>
-        {isOpen && <CategoryModal />}
+        {isOpen && <CategoryModal initialData={favCate} />}
         {category.map((d, i) => (
           <div key={i}>
             <div

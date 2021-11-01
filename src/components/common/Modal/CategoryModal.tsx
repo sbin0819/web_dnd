@@ -8,17 +8,6 @@ import {
   CategoryItemsType,
 } from '@lib/CONST/types';
 
-const favCate = {
-  title: '관심 카테고리',
-  items: [
-    { title: '일반 개발', loc: 'dev-0' },
-    { title: '웹 개발', loc: 'dev-1' },
-    { title: '일반 기획', loc: 'plan-0' },
-    { title: '웹 기획', loc: 'plan-1' },
-  ],
-  type: 'main',
-};
-
 function createInitCateObject(
   target: CategoryType[],
   personalCate: CategoryType,
@@ -40,8 +29,17 @@ function createInitCateObject(
   return obj;
 }
 
-function CategoryModal() {
-  const [personalCategory, setPersonalCategory] = useState(favCate);
+const defaultCate = {
+  title: '관심 카테고리',
+  items: [],
+  type: 'main',
+};
+
+interface IProps {
+  initialData: CategoryType;
+}
+function CategoryModal({ initialData = defaultCate }: IProps) {
+  const [personalCategory, setPersonalCategory] = useState(initialData);
   const [activeCategoryType, setActiveCategoryType] = useState<string>('dev');
   const [cateObj, setCateObj] = useState<CategoryObjType>({});
 
