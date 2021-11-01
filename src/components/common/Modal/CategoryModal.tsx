@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import produce from 'immer';
 import styled from 'styled-components';
-import { defaultCategory, defaultCategory2 } from '@lib/CONST/datas';
+import { defaultCategory } from '@lib/CONST/datas';
 import { CategoryType, CategoryItemsType } from '@lib/CONST/types';
 
 const favCate = {
@@ -13,70 +13,81 @@ const favCate = {
     { title: '웹 기획', loc: 'plan-1' },
   ],
   type: 'main',
-  include: ['dev', 'plan'],
 };
 
-function arrToObj(target: CategoryType[]) {
-  const obj = target.reduce((acc: any, curr: CategoryType, i) => {
-    acc[curr.type] = { ...curr, order: i };
+function createInitCateObject(
+  target: CategoryType[],
+  personalCate: CategoryType,
+) {
+  const validateArr = personalCate.items.map((i) => i.loc);
+  const obj = target.reduce((acc: any, curr: CategoryType) => {
+    acc[curr.type] = {
+      ...curr,
+      items: curr.items.map((item) => {
+        let selected = false;
+        if (validateArr.includes(item.loc)) {
+          selected = true;
+        }
+        return { ...item, selected };
+      }),
+    };
     return acc;
   }, {});
   return obj;
 }
 
 function CategoryModal() {
+  const [personalCategory, setPersonalCategory] = useState(favCate);
   const [activeCategoryType, setActiveCategoryType] = useState('dev');
-  const [objCate, setValue] = useState<any>({});
+  const [cateObj, setCateObj] = useState<any>({});
+
   useEffect(() => {
-    const result = arrToObj(defaultCategory);
-    setValue(result);
+    const result = createInitCateObject(defaultCategory, personalCategory);
+    setCateObj(result);
   }, []);
+
   const handleActiveCategoryType = (e: any) => {
     const { textContent } = e.target;
     setActiveCategoryType(textContent);
   };
   const handleSelectItem = (e: any) => {
-    // const { textContent } = e.target;
-    const type = 'dev';
-    const loc = 'dev-0';
-    const nextState = produce(objCate, (draft: any) => {
+    const { textContent } = e.target;
+    const nextState = produce(cateObj, (draft: any) => {
       draft[activeCategoryType].items = draft[activeCategoryType].items.map(
         (item: any) => {
-          if (item.loc === loc) {
+          if (item.loc === textContent) {
             return { ...item, selected: true };
           }
           return item;
         },
       );
     });
-    setValue(nextState);
+    setCateObj(nextState);
+  };
 
-    // setValue((prev: any) => ({
-    //   ...prev,
-    //   [activeCategoryType]: {
-    //     ...prev.activeCategoryType,
-    //     items: prev[activeCategoryType].items.map((item: any) => {
-    //       if (item.loc === loc) {
-    //         return { ...item, selected: true };
-    //       }
-    //       return item;
-    //     }),
-    //   },
-    // }));
+  const handlePersonalCategory = () => {
+    const seltedTruthyItems = Object.values(cateObj)
+      .map((el: any) => el.items.filter((i: any) => i.selected))
+      .flat();
+    const nextState = produce(personalCategory, (draft: any) => {
+      draft.items = seltedTruthyItems;
+    });
+    setPersonalCategory(nextState);
+    // api 요청
   };
   return (
     <Container>
       <HeaderContainer></HeaderContainer>
       <NavContainer>
-        {objCate &&
-          Object.values(objCate).map((val: CategoryType | any, i) => (
+        {cateObj &&
+          Object.values(cateObj).map((val: CategoryType | any, i) => (
             <div key={i} onClick={handleActiveCategoryType}>
               {val.type}
             </div>
           ))}
       </NavContainer>
       <BodyContainer>
-        {objCate[activeCategoryType]?.items?.map(
+        {cateObj[activeCategoryType]?.items?.map(
           (el: CategoryType | any, i: number) => (
             <div
               key={i}
@@ -85,11 +96,14 @@ function CategoryModal() {
               }}
               onClick={handleSelectItem}
             >
-              {el.title}
+              {el.loc}
             </div>
           ),
         )}
       </BodyContainer>
+      <FootContainer>
+        <button onClick={handlePersonalCategory}>button</button>
+      </FootContainer>
     </Container>
   );
 }
@@ -118,6 +132,11 @@ const NavContainer = styled.div`
   justify-content: space-between;
 `;
 const BodyContainer = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+const FootContainer = styled.div`
   display: flex;
   gap: 20px;
 `;
