@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react';
 import produce from 'immer';
 import styled from 'styled-components';
 import { defaultCategory } from '@lib/CONST/datas';
-import { CategoryType, CategoryItemsType } from '@lib/CONST/types';
+import {
+  CategoryObjType,
+  CategoryType,
+  CategoryItemsType,
+} from '@lib/CONST/types';
 
 const favCate = {
   title: '관심 카테고리',
@@ -38,21 +42,22 @@ function createInitCateObject(
 
 function CategoryModal() {
   const [personalCategory, setPersonalCategory] = useState(favCate);
-  const [activeCategoryType, setActiveCategoryType] = useState('dev');
-  const [cateObj, setCateObj] = useState<any>({});
+  const [activeCategoryType, setActiveCategoryType] = useState<string>('dev');
+  const [cateObj, setCateObj] = useState<CategoryObjType>({});
 
   useEffect(() => {
     const result = createInitCateObject(defaultCategory, personalCategory);
     setCateObj(result);
-  }, []);
+  }, [personalCategory]);
 
   const handleActiveCategoryType = (e: any) => {
     const { textContent } = e.target;
     setActiveCategoryType(textContent);
   };
+
   const handleSelectItem = (e: any) => {
     const { textContent } = e.target;
-    const nextState = produce(cateObj, (draft: any) => {
+    const nextState = produce(cateObj, (draft: CategoryObjType) => {
       draft[activeCategoryType].items = draft[activeCategoryType].items.map(
         (item: any) => {
           if (item.loc === textContent) {
@@ -67,9 +72,11 @@ function CategoryModal() {
 
   const handlePersonalCategory = () => {
     const seltedTruthyItems = Object.values(cateObj)
-      .map((el: any) => el.items.filter((i: any) => i.selected))
+      .map((el: CategoryType) =>
+        el.items.filter((i: CategoryItemsType) => i.selected),
+      )
       .flat();
-    const nextState = produce(personalCategory, (draft: any) => {
+    const nextState = produce(personalCategory, (draft: CategoryType) => {
       draft.items = seltedTruthyItems;
     });
     setPersonalCategory(nextState);
@@ -80,26 +87,24 @@ function CategoryModal() {
       <HeaderContainer></HeaderContainer>
       <NavContainer>
         {cateObj &&
-          Object.values(cateObj).map((val: CategoryType | any, i) => (
+          Object.values(cateObj).map((val: CategoryType, i) => (
             <div key={i} onClick={handleActiveCategoryType}>
               {val.type}
             </div>
           ))}
       </NavContainer>
       <BodyContainer>
-        {cateObj[activeCategoryType]?.items?.map(
-          (el: CategoryType | any, i: number) => (
-            <div
-              key={i}
-              style={{
-                color: el.selected ? 'red' : 'white',
-              }}
-              onClick={handleSelectItem}
-            >
-              {el.loc}
-            </div>
-          ),
-        )}
+        {cateObj[activeCategoryType]?.items?.map((el: CategoryItemsType, i) => (
+          <div
+            key={i}
+            style={{
+              color: el.selected ? 'red' : 'white',
+            }}
+            onClick={handleSelectItem}
+          >
+            {el.loc}
+          </div>
+        ))}
       </BodyContainer>
       <FootContainer>
         <button onClick={handlePersonalCategory}>button</button>

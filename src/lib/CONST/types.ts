@@ -9,3 +9,8 @@ export interface CategoryType {
   type: string;
   selected?: CategoryItemsType[];
 }
+
+// ?
+export interface CategoryObjType {
+  [index: string]: CategoryType;
+}
