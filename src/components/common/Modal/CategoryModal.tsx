@@ -16,8 +16,8 @@ const favCate = {
 };
 
 function arrToObj(target: CategoryType[]) {
-  const obj = target.reduce((acc: any, curr: CategoryType) => {
-    acc[curr.type] = curr;
+  const obj = target.reduce((acc: any, curr: CategoryType, i) => {
+    acc[curr.type] = { ...curr, order: i };
     return acc;
   }, {});
   return obj;
@@ -35,9 +35,20 @@ function CategoryModal() {
     setActiveCategoryType(textContent);
   };
   const handleSelectItem = (e: any) => {
-    const { textContent } = e.target;
+    // const { textContent } = e.target;
+    const type = 'dev';
+    const loc = 'dev-0';
     setValue((prev: any) => ({
       ...prev,
+      [activeCategoryType]: {
+        ...prev.activeCategoryType,
+        items: prev[activeCategoryType].items.map((item: any) => {
+          if (item.loc === loc) {
+            return { ...item, selected: true };
+          }
+          return item;
+        }),
+      },
     }));
   };
   return (
@@ -52,9 +63,17 @@ function CategoryModal() {
           ))}
       </NavContainer>
       <BodyContainer>
-        {objCate[activeCategoryType].items.map(
+        {objCate[activeCategoryType]?.items?.map(
           (el: CategoryType | any, i: number) => (
-            <div key={i}>{el.title}</div>
+            <div
+              key={i}
+              style={{
+                color: el.selected ? 'red' : 'white',
+              }}
+              onClick={handleSelectItem}
+            >
+              {el.title}
+            </div>
           ),
         )}
       </BodyContainer>
