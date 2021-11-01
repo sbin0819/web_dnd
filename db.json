@@ -9,8 +9,7 @@
           { "title": "일반 기획", "loc": "plan-0" },
           { "title": "웹 기획", "loc": "plan-1" }
         ],
-        "type": "main",
-        "include": ["dev", "plan"]
+        "type": "main"
       }
     }
   ],
