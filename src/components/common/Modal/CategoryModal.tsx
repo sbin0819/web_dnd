@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import produce from 'immer';
 import styled from 'styled-components';
 import { defaultCategory, defaultCategory2 } from '@lib/CONST/datas';
 import { CategoryType, CategoryItemsType } from '@lib/CONST/types';
@@ -38,18 +39,30 @@ function CategoryModal() {
     // const { textContent } = e.target;
     const type = 'dev';
     const loc = 'dev-0';
-    setValue((prev: any) => ({
-      ...prev,
-      [activeCategoryType]: {
-        ...prev.activeCategoryType,
-        items: prev[activeCategoryType].items.map((item: any) => {
+    const nextState = produce(objCate, (draft: any) => {
+      draft[activeCategoryType].items = draft[activeCategoryType].items.map(
+        (item: any) => {
           if (item.loc === loc) {
             return { ...item, selected: true };
           }
           return item;
-        }),
-      },
-    }));
+        },
+      );
+    });
+    setValue(nextState);
+
+    // setValue((prev: any) => ({
+    //   ...prev,
+    //   [activeCategoryType]: {
+    //     ...prev.activeCategoryType,
+    //     items: prev[activeCategoryType].items.map((item: any) => {
+    //       if (item.loc === loc) {
+    //         return { ...item, selected: true };
+    //       }
+    //       return item;
+    //     }),
+    //   },
+    // }));
   };
   return (
     <Container>
