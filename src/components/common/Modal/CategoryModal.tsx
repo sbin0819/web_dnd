@@ -49,9 +49,9 @@ function CategoryModal({ initialData = defaultCate }: IProps) {
   }, [personalCategory]);
 
   const handleActiveCategoryType = (e: any) => {
-    const { className } = e.target;
-    if (!className) return;
-    setActiveCategoryType(className);
+    const { id } = e.currentTarget;
+    if (!id) return;
+    setActiveCategoryType(id);
   };
 
   const handleSelectItem = (e: any) => {
@@ -94,6 +94,7 @@ function CategoryModal({ initialData = defaultCate }: IProps) {
               }
               key={i}
               onClick={handleActiveCategoryType}
+              id={el.type}
             >
               <a className={el.type}>{el.title}</a>
             </div>
