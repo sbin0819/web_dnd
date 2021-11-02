@@ -3,7 +3,7 @@ import { reset } from 'styled-reset';
 // import { media } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
-    ${reset}
+    ${reset};
     * {
         margin: 0;
         padding: 0;
@@ -34,7 +34,15 @@ export const GlobalStyle = createGlobalStyle`
     a{
         color: inherit;
         text-decoration:none;
+        cursor: pointer;
     }
+
+    .none {
+        display: none;
+    }
+
+
+
 
     .hidden_scrollbar {
         -ms-overflow-style: none; /* IE and Edge */

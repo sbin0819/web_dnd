@@ -49,16 +49,18 @@ function CategoryModal({ initialData = defaultCate }: IProps) {
   }, [personalCategory]);
 
   const handleActiveCategoryType = (e: any) => {
-    const { textContent } = e.target;
-    setActiveCategoryType(textContent);
+    const { className } = e.target;
+    if (!className) return;
+    setActiveCategoryType(className);
   };
 
   const handleSelectItem = (e: any) => {
-    const { textContent } = e.target;
+    const { className } = e.target;
+    if (!className) return;
     const nextState = produce(cateObj, (draft: CategoryObjType) => {
       draft[activeCategoryType].items = draft[activeCategoryType].items.map(
         (item: any) => {
-          if (item.loc === textContent) {
+          if (item.loc === className) {
             return { ...item, selected: true };
           }
           return item;
@@ -85,27 +87,33 @@ function CategoryModal({ initialData = defaultCate }: IProps) {
       <HeaderContainer></HeaderContainer>
       <NavContainer>
         {cateObj &&
-          Object.values(cateObj).map((val: CategoryType, i) => (
-            <div key={i} onClick={handleActiveCategoryType}>
-              {val.type}
+          Object.values(cateObj).map((el: CategoryType, i) => (
+            <div
+              className={
+                el.type === activeCategoryType ? 'nav-item on' : 'nav-item'
+              }
+              key={i}
+              onClick={handleActiveCategoryType}
+            >
+              <a className={el.type}>{el.title}</a>
             </div>
           ))}
       </NavContainer>
       <BodyContainer>
         {cateObj[activeCategoryType]?.items?.map((el: CategoryItemsType, i) => (
           <div
+            className={el.selected ? 'item on' : 'item'}
             key={i}
-            style={{
-              color: el.selected ? 'red' : 'white',
-            }}
             onClick={handleSelectItem}
           >
-            {el.loc}
+            <a className={el.loc}>{el.title}</a>
           </div>
         ))}
       </BodyContainer>
       <FootContainer>
-        <button onClick={handlePersonalCategory}>button</button>
+        <a className="btn" onClick={handlePersonalCategory}>
+          다 했어요!
+        </a>
       </FootContainer>
     </Container>
   );
@@ -119,12 +127,12 @@ const Container = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;
-  padding: 40px 50px 120px;
+  padding: 40px 0 120px;
   width: 100%;
   max-width: 800px;
-  height: 660px;
+  height: 630px;
   background: #2b2d31;
-  border-radius: 50px;
+  border-radius: 25px;
 `;
 
 const HeaderContainer = styled.div`
@@ -133,13 +141,68 @@ const HeaderContainer = styled.div`
 const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 0 50px;
+  .nav-item {
+    display: flex;
+    width: 120px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px 0 5px;
+    border-bottom: 3px solid transparent;
+  }
+  .on {
+    border-bottom: 3px solid #3562ff;
+  }
 `;
 const BodyContainer = styled.div`
+  border-top: 1px solid #43454a;
+  padding: 45px 50px;
+  height: 360px;
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  .item {
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    width: 160px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a0a1a7;
+    background: #393a40;
+    cursor: pointer;
+    position: relative;
+    word-break: keep-all;
+    user-select: none;
+    line-height: 1.2;
+  }
+  .on {
+    color: #fff;
+    background: #3562ff;
+  }
 `;
 
 const FootContainer = styled.div`
   display: flex;
   gap: 20px;
+  margin-top: 25px;
+  padding: 45px 50px;
+  justify-content: center;
+  align-items: center;
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 246px;
+    height: 56px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 100px;
+    color: #fff;
+    background: #3562ff;
+  }
 `;

@@ -34,8 +34,7 @@ const Container = styled.div`
     cursor: pointer;
     font-size: 18px;
   }
-
-  .on {
+  .cate-item-on {
     color: #e8e9ee;
     font-weight: 700;
   }
@@ -87,7 +86,9 @@ function FavSidebar() {
           <div key={i}>
             <div
               className={
-                d.title === activeCategory ? 'cate-title on' : 'cate-title '
+                d.title === activeCategory
+                  ? 'cate-title cate-item-on'
+                  : 'cate-title '
               }
             >
               <div onClick={handleActiveTitle}>{d.title}</div>
