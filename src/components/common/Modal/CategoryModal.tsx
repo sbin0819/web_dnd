@@ -153,7 +153,7 @@ const NavContainer = styled.div`
     padding: 15px 0 5px;
     border-bottom: 3px solid transparent;
   }
-  .on {
+  & > .on {
     border-bottom: 3px solid #3562ff;
   }
 `;

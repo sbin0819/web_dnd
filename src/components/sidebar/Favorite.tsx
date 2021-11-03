@@ -34,7 +34,7 @@ const Container = styled.div`
     cursor: pointer;
     font-size: 18px;
   }
-  .cate-item-on {
+  & > .on {
     color: #e8e9ee;
     font-weight: 700;
   }
