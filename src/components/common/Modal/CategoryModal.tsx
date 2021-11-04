@@ -55,6 +55,7 @@ function CategoryModal({ initialData = defaultCate }: IProps) {
   };
 
   const handleSelectItem = (e: any) => {
+    e.stopPropagation();
     const { className } = e.target;
     if (!className) return;
     const nextState = produce(cateObj, (draft: CategoryObjType) => {
@@ -83,40 +84,45 @@ function CategoryModal({ initialData = defaultCate }: IProps) {
     // api 요청
   };
   return (
-    <Container>
-      <HeaderContainer></HeaderContainer>
-      <NavContainer>
-        {cateObj &&
-          Object.values(cateObj).map((el: CategoryType, i) => (
-            <div
-              className={
-                el.type === activeCategoryType ? 'nav-item on' : 'nav-item'
-              }
-              key={i}
-              onClick={handleActiveCategoryType}
-              id={el.type}
-            >
-              <a className={el.type}>{el.title}</a>
-            </div>
-          ))}
-      </NavContainer>
-      <BodyContainer>
-        {cateObj[activeCategoryType]?.items?.map((el: CategoryItemsType, i) => (
-          <div
-            className={el.selected ? 'item on' : 'item'}
-            key={i}
-            onClick={handleSelectItem}
-          >
-            <a className={el.loc}>{el.title}</a>
-          </div>
-        ))}
-      </BodyContainer>
-      <FootContainer>
-        <a className="btn" onClick={handlePersonalCategory}>
-          다 했어요!
-        </a>
-      </FootContainer>
-    </Container>
+    <div>
+      <Container>
+        <HeaderContainer></HeaderContainer>
+        <NavContainer>
+          {cateObj &&
+            Object.values(cateObj).map((el: CategoryType, i) => (
+              <div
+                className={
+                  el.type === activeCategoryType ? 'nav-item on' : 'nav-item'
+                }
+                key={i}
+                id={el.type}
+              >
+                <a className={el.type} onClick={handleActiveCategoryType}>
+                  {el.title}
+                </a>
+              </div>
+            ))}
+        </NavContainer>
+        <BodyContainer>
+          {cateObj[activeCategoryType]?.items?.map(
+            (el: CategoryItemsType, i) => (
+              <div
+                className={el.selected ? 'item on' : 'item'}
+                key={i}
+                onClick={handleSelectItem}
+              >
+                <a className={el.loc}>{el.title}</a>
+              </div>
+            ),
+          )}
+        </BodyContainer>
+        <FootContainer>
+          <a className="btn" onClick={handlePersonalCategory}>
+            다 했어요!
+          </a>
+        </FootContainer>
+      </Container>
+    </div>
   );
 }
 
@@ -180,6 +186,13 @@ const BodyContainer = styled.div`
     word-break: keep-all;
     user-select: none;
     line-height: 1.2;
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
   }
   .on {
     color: #fff;

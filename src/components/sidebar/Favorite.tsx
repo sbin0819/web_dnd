@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
 import { defaultCategory } from '@lib/CONST/datas';
 
 import { CategoryModal } from '@common/Modal';
-
 import { CategoryType } from './types';
+
+import useClickOutside from '@hooks/useClickOutside';
 
 const Container = styled.div`
   display: flex;
@@ -20,6 +21,10 @@ const Container = styled.div`
     margin-bottom: 5px;
     font-size: 20px;
     cursor: pointer;
+    .on {
+      color: #e8e9ee;
+      font-weight: 700;
+    }
   }
 
   .cate-item {
@@ -33,10 +38,6 @@ const Container = styled.div`
     word-break: keep-all;
     cursor: pointer;
     font-size: 18px;
-  }
-  & > .on {
-    color: #e8e9ee;
-    font-weight: 700;
   }
 `;
 
@@ -57,7 +58,9 @@ function FavSidebar() {
   const [category, setCategory] = useState<CategoryType[]>([]);
   const [activeCategory, setActiveCategory] = useState('관심 카테고리');
   const [activeItem, setActiveItem] = useState('');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef(null);
+  useClickOutside(modalRef, () => setIsOpen(false));
 
   const handleActiveTitle = (e: any) => {
     const { textContent } = e.target;
@@ -72,8 +75,6 @@ function FavSidebar() {
     // 카드 api 요청
   };
 
-  const handleModal = () => setIsOpen((prev) => !prev);
-
   useEffect(() => {
     setCategory([favCate, ...defaultCategory]);
   }, []);
@@ -81,19 +82,26 @@ function FavSidebar() {
   return (
     <>
       <Container>
-        {isOpen && <CategoryModal initialData={favCate} />}
         {category.map((d, i) => (
           <div key={i}>
-            <div
-              className={
-                d.title === activeCategory
-                  ? 'cate-title cate-item-on'
-                  : 'cate-title '
-              }
-            >
-              <div onClick={handleActiveTitle}>{d.title}</div>
+            <div className="cate-title">
+              <div
+                className={d.title === activeCategory ? 'on' : ''}
+                onClick={handleActiveTitle}
+              >
+                {d.title}
+              </div>
+              {isOpen && (
+                <div ref={modalRef}>
+                  <CategoryModal initialData={favCate} />
+                </div>
+              )}
               {i === 0 && (
-                <div onClick={handleModal}>
+                <div
+                  onClick={() => {
+                    setIsOpen(true);
+                  }}
+                >
                   <BsThreeDots />
                 </div>
               )}
