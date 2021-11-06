@@ -5,10 +5,12 @@ import { GlobalStyle } from '../styles/globalStyle';
 import { theme } from '../styles/theme';
 import useTheme from '@hooks/useTheme';
 import Header from '@components/Header';
+
+import { RecoilRoot } from 'recoil';
 function MyApp({ Component, pageProps }: AppProps) {
   const type = useTheme();
   return (
-    <>
+    <RecoilRoot>
       <GlobalStyle />
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header size={type} />
         <Component {...pageProps} />
       </ThemeProvider>
-    </>
+    </RecoilRoot>
   );
 }
 

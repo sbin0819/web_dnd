@@ -8,6 +8,8 @@ import { CategoryType } from './types';
 
 import useClickOutside from '@hooks/useClickOutside';
 
+import axios from 'axios';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
